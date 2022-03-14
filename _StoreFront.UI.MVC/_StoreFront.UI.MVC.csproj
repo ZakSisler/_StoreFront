@@ -185,10 +185,57 @@
   <ItemGroup>
     <Content Include="Content\assets\favicon.ico" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\img\basicChessboard.jpg" />
+    <Content Include="Content\img\blackWhiteChess.jpg" />
+    <Content Include="Content\img\blueGlassSet.jpg" />
+    <Content Include="Content\img\bookWcoffee.jpg" />
+    <Content Include="Content\img\checkeredWhitePalace.jpg" />
+    <Content Include="Content\img\chessBackground_BW.jpg" />
+    <Content Include="Content\img\chessboard_01.jpg" />
+    <Content Include="Content\img\chessCase.jpg" />
+    <Content Include="Content\img\chessCompetition.jpg" />
+    <Content Include="Content\img\chessInstructor.jpg" />
+    <Content Include="Content\img\chessLessons.jpg" />
+    <Content Include="Content\img\chessStudent.jpg" />
+    <Content Include="Content\img\chessTutoring.jpg" />
+    <Content Include="Content\img\fancyChessSet.jpg" />
+    <Content Include="Content\img\femaleChessLesson.jpg" />
+    <Content Include="Content\img\glassChessPieces.jpg" />
+    <Content Include="Content\img\goldAndSilverSet.jpg" />
+    <Content Include="Content\img\metalChessKnight.jpg" />
+    <Content Include="Content\img\metalChessPieces.jpg" />
+    <Content Include="Content\img\noveltyChessItem.jpg" />
+    <Content Include="Content\img\orangeChess-1.jpg" />
+    <Content Include="Content\img\orangeChess-2.jpg" />
+    <Content Include="Content\img\orangeChess-3.jpg" />
+    <Content Include="Content\img\chessTime.jpg" />
+    <Content Include="Content\img\stackOfBooks.jpg" />
+    <Content Include="Content\img\stoneChessSet.jpg" />
+    <Content Include="Content\img\woodChessClub.jpg" />
+    <Content Include="Content\img\woodenChess.jpg" />
     <Content Include="Content\js\scripts.js" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\_OG_Fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="configs\connections.config" />
+    <Content Include="Scripts\_OG_Scripts\bootstrap.js" />
+    <Content Include="Scripts\_OG_Scripts\bootstrap.min.js" />
+    <Content Include="fonts\_OG_Fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\_OG_Fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\_OG_Fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\_OG_Fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\_OG_Fonts\FontAwesome.otf" />
+    <None Include="Scripts\_OG_Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\_OG_Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery.validate.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\_OG_Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\_OG_Scripts\modernizr-2.8.3.js" />
     <Content Include="_Archive\assets\favicon.ico" />
     <Content Include="_Archive\css\styles.css" />
     <Content Include="_Archive\index.html" />
@@ -241,12 +288,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="fonts\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Archive_Layout.cshtml" />
+    <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.slim.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
