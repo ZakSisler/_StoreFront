@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_StoreFront.UI.MVC", "_StoreFront.UI.MVC\_StoreFront.UI.MVC.csproj", "{B05DB81E-EEEA-4AB3-B757-1B8F57A32D13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_StoreFront.DATA.EF", "_StoreFront.DATA.EF\_StoreFront.DATA.EF.csproj", "{70533E46-C1DC-48E5-9AE5-2B77011C781B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{B05DB81E-EEEA-4AB3-B757-1B8F57A32D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B05DB81E-EEEA-4AB3-B757-1B8F57A32D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B05DB81E-EEEA-4AB3-B757-1B8F57A32D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70533E46-C1DC-48E5-9AE5-2B77011C781B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70533E46-C1DC-48E5-9AE5-2B77011C781B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70533E46-C1DC-48E5-9AE5-2B77011C781B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70533E46-C1DC-48E5-9AE5-2B77011C781B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
