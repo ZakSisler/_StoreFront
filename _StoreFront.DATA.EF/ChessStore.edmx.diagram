@@ -10,11 +10,11 @@
         <EntityTypeShape EntityType="ChessStoreModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ChessStoreModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ChessStoreModel.AspNetUser" Width="2" PointX="2.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChessStoreModel.Department" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChessStoreModel.Department" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ChessStoreModel.Employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChessStoreModel.ProductCategory" Width="1.875" PointX="5.5" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChessStoreModel.Product" Width="1.75" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChessStoreModel.ProductStatu" Width="1.5" PointX="5.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChessStoreModel.ProductCategory" Width="1.875" PointX="4.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChessStoreModel.Product" Width="1.875" PointX="7.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChessStoreModel.ProductStatu" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ChessStoreModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
         <AssociationConnector Association="ChessStoreModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="ChessStoreModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
