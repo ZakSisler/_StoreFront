@@ -77,7 +77,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChessStore.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ChessStoreMetadata\ChessStoreMetadata.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>ChessStore.tt</DependentUpon>
     </Compile>
