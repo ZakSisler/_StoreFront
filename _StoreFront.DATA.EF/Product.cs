@@ -20,6 +20,7 @@ namespace _StoreFront.DATA.EF
         public int ProductCategoryID { get; set; }
         public int ProductStatusID { get; set; }
         public Nullable<decimal> Price { get; set; }
+        public string ProductImage { get; set; }
     
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual ProductStatu ProductStatu { get; set; }

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<_StoreFront.DATA.EF.ProductCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCategory1)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCategory1)
+            </td>
+
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductCategoryID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductCategoryID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductCategoryID })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
