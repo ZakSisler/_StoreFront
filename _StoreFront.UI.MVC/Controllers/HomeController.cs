@@ -11,7 +11,6 @@ namespace _StoreFront.UI.MVC.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
