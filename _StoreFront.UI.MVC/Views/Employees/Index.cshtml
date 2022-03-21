@@ -26,9 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Department.DepartmentName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Employee1.FirstName)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -47,9 +47,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Department.DepartmentName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Employee1.FirstName)
-            </td>
+            </td>*@
             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
             {
                 <td>
