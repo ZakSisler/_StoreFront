@@ -1,4 +1,5 @@
-﻿@model IEnumerable<_StoreFront.DATA.EF.Product>
+﻿@model PagedList.IPagedList<_StoreFront.DATA.EF.Product>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Product";
@@ -12,30 +13,36 @@
         @Html.ActionLink("Create New", "Create")
     </p>
 }
-<table class="table">
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+<table class="table data-table table-striped">
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductDescription)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProductDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductImage)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProductImage)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductCategory.ProductCategory1)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProductCategory.ProductCategory1)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductStatu.StatusName)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProductStatu.StatusName)
         </th>
-        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-        {
-            <th></th>
-        }
+        @*@if (Request.IsAuthenticated && User.IsInRole("Admin")) { }*@
+
+        <th></th>
+
     </tr>
 
     @foreach (var item in Model)
@@ -60,15 +67,27 @@
                 @Html.DisplayFor(modelItem => item.ProductStatu.StatusName)
             </td>
 
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-                </td>
-            }
+            @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+            </td>
+            @*}*@
         </tr>
     }
 
 </table>
+
+@section scripts{
+
+    <script>
+        //Apply the jQuery DataTables plugin
+        $(document).ready(function () {
+            $(".data-table").DataTable();
+        });
+    </script>
+
+}
+

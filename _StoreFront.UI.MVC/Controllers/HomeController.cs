@@ -89,5 +89,7 @@ namespace _StoreFront.UI.MVC.Controllers
             return View("EmailConfirmation", cvm);
 
         }
+
+        
     }
 }

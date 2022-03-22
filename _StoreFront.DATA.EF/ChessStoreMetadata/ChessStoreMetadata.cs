@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations; //added for metadata and validation
 
 namespace _StoreFront.DATA.EF//.ChessStoreMetadata - name must match the namespace of classes these partial classes will buddy up with.
 {
+
     #region Department Metadata
     public class DepartmentMetadata
     {
@@ -103,6 +104,7 @@ namespace _StoreFront.DATA.EF//.ChessStoreMetadata - name must match the namespa
         [Required]
         [Display(Name = "Status")]
         [DisplayFormat(NullDisplayText = "N/A")]
+        [Key]
         public string StatusName { get; set; }
 
         [MetadataType(typeof(ProductStatusMetadata))]
