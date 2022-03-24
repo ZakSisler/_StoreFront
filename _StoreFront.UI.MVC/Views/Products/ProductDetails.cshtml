@@ -1,0 +1,60 @@
+﻿@model _StoreFront.DATA.EF.Product
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCategory.ProductCategory1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCategory.ProductCategory1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductStatu.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductStatu.StatusName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

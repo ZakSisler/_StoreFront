@@ -490,6 +490,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\EmailConfirmation.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Products\ProductsCreate1.cshtml" />
+    <Content Include="Views\Products\ProductDetails.cshtml" />
+    <Content Include="Views\Products\ProductEdit.cshtml" />
+    <Content Include="Views\Products\ProductCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
