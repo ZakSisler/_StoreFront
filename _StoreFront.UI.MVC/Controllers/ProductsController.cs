@@ -101,6 +101,7 @@ namespace _StoreFront.UI.MVC.Controllers
         #endregion
 
 
+        #region old CRUD
         // GET: Products/Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
@@ -194,6 +195,7 @@ namespace _StoreFront.UI.MVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
@@ -208,82 +210,82 @@ namespace _StoreFront.UI.MVC.Controllers
 
         #region AJAX CRUD Functionality
 
-        //Deletes the product record, returns only JSON data on id & confirmation
-        [AcceptVerbs(HttpVerbs.Post)]
-        public JsonResult AjaxDelete(int id)
-        {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+        ////Deletes the product record, returns only JSON data on id & confirmation
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //public JsonResult AjaxDelete(int id)
+        //{
+        //    Product product = db.Products.Find(id);
+        //    db.Products.Remove(product);
+        //    db.SaveChanges();
 
-            string confirmMessage = string.Format("Deleted Product '{0}' from the database.", product.ProductName);
-            return Json(new { id = id, message = confirmMessage });
-        }
+        //    string confirmMessage = string.Format("Deleted Product '{0}' from the database.", product.ProductName);
+        //    return Json(new { id, message = confirmMessage });
+        //}
 
-        //Gets the partial View for Details with AJAX
-        //Generate this View like normal, but choose Details scaffolding for Product AND check Partial View checkbox
-        [HttpGet]
-        public PartialViewResult ProductDetails(int id)
-        {
-            Product product = db.Products.Find(id);
-            return PartialView(product);
-
-
-            ///////////////////////////example
-            //Create Partial View (ProductDetails.cshtml)
-            // - Template: Details
-            // - Model Class: Product
-            // - Data Context Class: ChessStoreEntities
-            // - Check "Create as Partial View" checkbox
-            // - Minor tweaks to View Content
-        }
-
-        //Create a new Product record. Also returns the products data as JSON.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult AjaxCreate(Product product)
-        {
-            db.Products.Add(product);
-            db.SaveChanges();
-            return Json(product);
+        ////Gets the partial View for Details with AJAX
+        ////Generate this View like normal, but choose Details scaffolding for Product AND check Partial View checkbox
+        //[HttpGet]
+        //public PartialViewResult ProductDetails(int id)
+        //{
+        //    Product product = db.Products.Find(id);
+        //    return PartialView(product);
 
 
-            //////////////////example
-            /*
-             * Create a Partial View (ProductCreate.cshtml)
-             * - Template: Create
-             * - Model: Product
-             * - Data Context classL ChessStoreEntities
-             * - Check "Create as Partial View"
-             */
-        }
+        //    ///////////////////////////example
+        //    //Create Partial View (ProductDetails.cshtml)
+        //    // - Template: Details
+        //    // - Model Class: Product
+        //    // - Data Context Class: ChessStoreEntities
+        //    // - Check "Create as Partial View" checkbox
+        //    // - Minor tweaks to View Content
+        //}
 
-        //GET PartialView for a product edit form displayed with AJAX
-        [HttpGet]
-        public PartialViewResult ProductEdit(int id)
-        {
-            Product product = db.Products.Find(id);
-            return PartialView(product);
+        ////Create a new Product record. Also returns the products data as JSON.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public JsonResult AjaxCreate(Product product)
+        //{
+        //    db.Products.Add(product);
+        //    db.SaveChanges();
+        //    return Json(product);
 
-            /*
-             * Create a Partial View (ProductEdit.cshtml) 
-             * - Template: edit
-             * - Model: Product
-             * - Date Context Class: ChessStorePlusEntities
-             * - Check the "Create as Partial View" checkbox
-             * - Minor tweaks to content
-             */
-        }
 
-        //Edits publisher record and returns publishers's data as JSON
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult AjaxEdit(Product product)
-        {
-            db.Entry(product).State = EntityState.Modified;
-            db.SaveChanges();
-            return Json(product);
-        }
+        //    //////////////////example
+        //    /*
+        //     * Create a Partial View (ProductCreate.cshtml)
+        //     * - Template: Create
+        //     * - Model: Product
+        //     * - Data Context classL ChessStoreEntities
+        //     * - Check "Create as Partial View"
+        //     */
+        //}
+
+        ////GET PartialView for a product edit form displayed with AJAX
+        //[HttpGet]
+        //public PartialViewResult ProductEdit(int id)
+        //{
+        //    Product product = db.Products.Find(id);
+        //    return PartialView(product);
+
+        //    /*
+        //     * Create a Partial View (ProductEdit.cshtml) 
+        //     * - Template: edit
+        //     * - Model: Product
+        //     * - Date Context Class: ChessStorePlusEntities
+        //     * - Check the "Create as Partial View" checkbox
+        //     * - Minor tweaks to content
+        //     */
+        //}
+
+        ////Edits publisher record and returns publishers's data as JSON
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public JsonResult AjaxEdit(Product product)
+        //{
+        //    db.Entry(product).State = EntityState.Modified;
+        //    db.SaveChanges();
+        //    return Json(product);
+        //}
 
         #endregion
 

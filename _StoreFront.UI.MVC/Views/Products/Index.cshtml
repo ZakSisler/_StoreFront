@@ -2,10 +2,16 @@
 @using PagedList.Mvc;
 
 @{
+    /**/
+
     ViewBag.Title = "Product";
 }
 
 <h2>@ViewBag.Title</h2>
+
+@*<p class="row">
+    <button id="toggleProductCreate" class="btn btn-primary text-right pull-left">Add New</button>
+</p>*@
 
 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
 {
@@ -18,7 +24,15 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
-<table class="table data-table table-striped">
+
+
+@*Added AjaxCreate Partial View for a Create form*@
+@*<div id="ProductCreate">
+    @Html.Partial("ProductCreate", new _StoreFront.DATA.EF.Product())
+</div>*@
+
+<table class="table data-table table-striped" id="ProductTable">
+    @* Possibly plural products *@
 
     <tr>
         <th>
@@ -41,13 +55,13 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
         </th>
         @*@if (Request.IsAuthenticated && User.IsInRole("Admin")) { }*@
 
-        <th></th>
+        @*<th></th>*@
 
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="Product-@item.ProductID">
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
@@ -67,14 +81,35 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
                 @Html.DisplayFor(modelItem => item.ProductStatu.StatusName)
             </td>
 
-            @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                {*@
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-            </td>
-            @*}*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                </td>
+            }
+
+            
+            @*<td>
+                <a href="" class="EditLink" id="@item.ProductID">Edit</a> |
+
+
+                <a href="" class="DetailsLink" id="@item.ProductID">Details</a> |
+
+                @Ajax.ActionLink("Delete", "AjaxDelete", "Products", new { id = item.ProductID },
+               new AjaxOptions
+               {
+                   HttpMethod = "POST",
+                   Confirm = $"Are you sure you want to delete {item.ProductName} from Products?",
+                   OnSuccess = "deleteConfirmed",
+                   OnFailure = "deleteFailed"
+               }
+               )
+            </td>*@
+        
+
+
         </tr>
     }
 
@@ -83,11 +118,193 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 @section scripts{
 
     <script>
-        //Apply the jQuery DataTables plugin
-        $(document).ready(function () {
-            $(".data-table").DataTable();
+            //Apply the jQuery DataTables plugin
+            $(document).ready(function () {
+                $(".data-table").DataTable();
+            });
+        </script>
+
+    @*<script>
+
+        //******* AJAX DELETE ***********//
+
+        function deleteConfirmed(response, status, data) {
+
+            //Remove the row for the desired publisher from the table on the screen
+            var rowId = "#Product-" + response.id;
+            $("#ProductsTable").find(rowId).remove();
+
+            //Display a status message (use AJAx response's message property)
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>");
+
+        }
+
+        function deleteFailed(response, status, data) {
+
+            //Display a status message (use AJX response's message property)
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete unsuccessful. Is this product referenced? If so, please change the product name or delete the product. </div>");
+
+        }
+
+        //******* SHOW DETAILS DIALOG BOX ***********//
+        $('a.DetailsLink').click(function (e) {
+            e.preventDefault(); //This prevents the default behavior - here, it prevents reloading the page
+
+            //Target the dialog/pop-up placeholder <div>, pass it data (the clicked link's ID),
+            //Then apply jQueryUI dialog plugin to make it a pop-up withvarious settings.
+            //Open the PublisherDetails partial view in popup for the correct publisher
+            $("#ProductDetails").data('pId', $(this).attr('id'))
+                .dialog({
+                    width: 400,
+                    height: 200,
+                    open: function () {
+                        var prodID = $(this).data('pId');
+                        $(this).load("/Products/ProductDetails/" + prodID);
+                    },
+                    title: "Product Details",
+                    modal: true,
+                    resizable: false
+
+                }); //End conversion to dialog box
+
+        }); //End details button click event handler
+
+        //******* SHOW CREATE FORM ***********//
+        $("#ProductCreate").hide(); //Start with the Create form hidden
+        $("#toggleProductCreate").click(function () {
+            $("#ProductCreate").toggle(); //Flip between show/hide
+        });//End create button click event
+
+        //******* AJAX CREATE ***********//
+        /*
+         * Summary: When the form is submitted, we need to format the data (serialization).
+         * The notification (MessageContent) will show status updates.
+         *
+         * jQuery Ajax will do the following:
+         *  - Call the POST AjaxCreate action in the Publishers controller
+         *  - Pass in the JSON data from the form
+         *  - On failure, it will:
+         *      - Notify the user of the error
+         *  - On success it will:
+         *      - Notify the user of the success
+         *      - Reset form
+         *      - "Add" the new row to the Publishers table on this page
+         */
+
+        $("#ProductCreateForm").submit(function (e) {
+            var formData = $(this).serializeArray();
+            console.log(formData);
+            e.preventDefault();
+
+            $.ajax({
+                url: "/Products/AjaxCreate",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                error: function (e) {
+                    $("#MessageContent").html("<div class='alert alert-danger'>There was a problem!</div>");
+                },
+                success: function (foo) {
+                    $("#MessageContent").html("<div class='alert alert-success'>Record succesfully added!</div>");
+                    $("#ProductCreateForm")[0].reset();
+                    $(function () {
+                        var row = '<tr><td>' + foo.ProductName
+                            + '</td><td>' + foo.ProductDescription
+                            + '</td><td>' + foo.Price
+                            + '</td><td>' + foo.ProductImage
+                            + '</td><td>' + foo.ProductCategory1
+                            + '</td><td>' + foo.StatusName
+                            //+ '</td><td>' + (foo.IsActive
+                            //    ? '<input type="checkbox" disabled="disabled" checked="checked" />'
+                            //    : '<input type="checkbox" disabled="disabled" />'
+                            //End ternary operator to assing the form's boolean value as a checkbox (checked or unchecked)
+                            + '</td><td>Refresh to view options</td></tr>';
+                        $("#ProductsTable").append(row);
+                    }); //End of build & append row functionality
+                } //End of success property
+            }); //End Ajax form submission property
+
+        }); //End form submit handler
+
+
+        //******* AJAX CREATE ***********//
+        var originalContent = null;
+
+        $("a.EditLink").click(function (e) {
+            e.preventDefault();
+            var ProductID = $(this).attr("id");
+
+            var row = $("#Product-" + productID).children();
+
+            originalContent = {
+                ProdId: productID,
+                ProdName: row[0].innerText,
+                ProdDesc: row[1].innerText,
+                Price: row[2].innertext,
+                ProdImg: row[3].innerText,
+                StsName: row[4].innerText
+
+            };
+
+            console.log(originalContent);
+
+            $.get("/Products/ProductEdit/" + productID, function (data) {
+                $("#Product-" + productID).replaceWith(
+                    '<tr id="Product-' + productID + '"><td colspan="5">' + data + '</td></tr>');
+            });
         });
-    </script>
+
+        $(document).on("click", "#saveUpdate", function () {
+            var formData = $("#ProductEditForm").serializeArray();
+
+            $("#MessageContent").html("<div class='alert alert-info'>Please wait...</div>");
+
+            $.ajax({
+                url: "/Products/AjaxEdit",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function (data) {
+                    $("#MessageContent").html("<div class='alert alert-success'>Your record was successfully updated!</div>");
+                    $("#ProductEditForm")[0].reset();
+
+                    $(function () {
+                        var row = '<tr><td>' + foo.ProductName
+                            + '</td><td>' + foo.ProductDescription
+                            + '</td><td>' + foo.Price
+                            + '</td><td>' + foo.ProductImage
+                            + '</td><td>' + foo.ProductCategory1
+                            + '</td><td>' + foo.StatusName
+                            //End ternary operator to assing the form's boolean value as a checkbox (checked or unchecked)
+                            + '</td><td>Refresh to view options</td></tr>';
+
+                        $('#Product-' + data.productID).replaceWith(row); //Replacing the row instead of appending (adding it)
+                    });
+
+                },
+                error: function (e) {
+                    $("#MessageContent").html("<div class='alert alert-warning'>There was an error. Please try again or contact the site administrator.</div>");
+
+                    $(function () {
+                        var row = '<tr id="Product-' + originalContent.ProdId + '"><td>' + originalContent.ProdName
+                            + '</td><td>' + originalContent.ProductDescription
+                            + '</td><td>' + originalContent.Price
+                            + '</td><td>' + originalContent.ProductImage
+                            + '</td><td>' + originalContent.ProductCategory1
+                            + '</td><td>' + originalContent.StatusName
+                            //? '<input type="checkbox" disabled="disabled" checked="checked" />'
+                            //: '<input type="checkbox" disabled="disabled" />'
+                            //End ternary operator to assing the form's boolean value as a checkbox (checked or unchecked)
+                            + '</td><td>Refresh to view options</td></tr>';
+
+                        $('#Product-' + data.productID).replaceWith(row); //Replacing the row instead of appending (adding it)
+                    });
+
+                }
+            });
+        });
+
+    </script>*@
 
 }
 
