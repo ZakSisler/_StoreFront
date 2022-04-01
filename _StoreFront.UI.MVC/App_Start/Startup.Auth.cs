@@ -54,7 +54,7 @@ namespace _StoreFront.UI.MVC
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
+            //app.UseFaceproductAuthentication(
             //   appId: "",
             //   appSecret: "");
 

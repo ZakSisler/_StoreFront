@@ -26,8 +26,8 @@ namespace _StoreFront.UI.MVC
             bundles.Add(new ScriptBundle("~/bundles/template").Include(
                 "~/Scripts/jquery-3.3.1.min.js",
                 "~/Scripts/jquery.dataTables.min.js",
-                "~/Scripts/bootstrap.min.js",
-                "~/Scripts/main.js"
+                //"~/Scripts/bootstrap.min.js",
+                "~/Scripts/Content/js/scripts.js"
                 ));
 
 

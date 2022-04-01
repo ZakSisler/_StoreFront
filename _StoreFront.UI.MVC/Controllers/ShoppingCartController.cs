@@ -53,7 +53,7 @@ namespace _StoreFront.UI.MVC.Controllers
             //Get the cart from the Session and store it in a local variable
             Dictionary<int, CartItemViewModel> shoppingCart = (Dictionary<int, CartItemViewModel>)Session["cart"];
 
-            //Target correct cart item using bookID for the key. Then change the Qty property with the qty parameter
+            //Target correct cart item using productID for the key. Then change the Qty property with the qty parameter
             shoppingCart[productID].Qty = qty;
 
             //Return the (now updated) local cart to the session

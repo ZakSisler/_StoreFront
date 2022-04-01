@@ -10,6 +10,8 @@ using _StoreFront.DATA.EF;
 using _StoreFront.UI.MVC.Models;
 using PagedList;
 using PagedList.Mvc;
+using _StoreFront.UI.MVC.Utilities;
+using System.Drawing;
 
 namespace _StoreFront.UI.MVC.Controllers
 {
@@ -76,7 +78,7 @@ namespace _StoreFront.UI.MVC.Controllers
             }
             else
             {
-                //IF the Book is valid, add the line-item to the cart
+                //IF the product is valid, add the line-item to the cart
                 CartItemViewModel item = new CartItemViewModel(qty, product);
 
                 //Put the item in the local cart. If they already have that product as a cart item, 
@@ -102,100 +104,260 @@ namespace _StoreFront.UI.MVC.Controllers
 
 
         #region old CRUD
-        // GET: Products/Create
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create()
-        {
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1");
-            ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName");
-            return View();
-        }
+        //// GET: Products/Create
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Create()
+        //{
+        //    ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1");
+        //    ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName");
+        //    return View();
+        //}
 
-        // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductDescription,ProductCategoryID,ProductStatusID,Price,ProductImage")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Products/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductDescription,ProductCategoryID,ProductStatusID,Price,ProductImage")] Product product)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Products.Add(product);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1", product.ProductCategoryID);
-            ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName", product.ProductStatusID);
-            return View(product);
-        }
+        //    ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1", product.ProductCategoryID);
+        //    ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName", product.ProductStatusID);
+        //    return View(product);
+        //}
 
-        // GET: Products/Edit/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1", product.ProductCategoryID);
-            ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName", product.ProductStatusID);
-            return View(product);
-        }
+        //// GET: Products/Edit/5
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Product product = db.Products.Find(id);
+        //    if (product == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1", product.ProductCategoryID);
+        //    ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName", product.ProductStatusID);
+        //    return View(product);
+        //}
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductDescription,ProductCategoryID,ProductStatusID,Price,ProductImage")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1", product.ProductCategoryID);
-            ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName", product.ProductStatusID);
-            return View(product);
-        }
+        //// POST: Products/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductDescription,ProductCategoryID,ProductStatusID,Price,ProductImage")] Product product)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(product).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "ProductCategory1", product.ProductCategoryID);
+        //    ViewBag.ProductStatusID = new SelectList(db.ProductStatus, "ProductStatusID", "StatusName", product.ProductStatusID);
+        //    return View(product);
+        //}
 
-        // GET: Products/Delete/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
+        //// GET: Products/Delete/5
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Product product = db.Products.Find(id);
+        //    if (product == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(product);
+        //}
 
-        // POST: Products/Delete/5
-        [Authorize(Roles = "Admin")]
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        //// POST: Products/Delete/5
+        //[Authorize(Roles = "Admin")]
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Product product = db.Products.Find(id);
+        //    db.Products.Remove(product);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+        #endregion
+
+       
+
+
+        #region AJAX CRUD Functionality
+
+        //Deletes the product record, returns only JSON data on id & confirmation
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AjaxDelete(int id)
         {
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            string confirmMessage = string.Format("Deleted Product '{0}' from the database.", product.ProductName);
+            return Json(new { id, message = confirmMessage });
         }
-        #endregion
+
+        //Gets the partial View for Details with AJAX
+        //Generate this View like normal, but choose Details scaffolding for Product AND check Partial View checkbox
+        [HttpGet]
+        public PartialViewResult ProductDetails(int id)
+        {
+            Product product = db.Products.Find(id);
+            return PartialView(product);
+
+
+            ///////////////////////////example
+            //Create Partial View (ProductDetails.cshtml)
+            // - Template: Details
+            // - Model Class: Product
+            // - Data Context Class: ChessStoreEntities
+            // - Check "Create as Partial View" checkbox
+            // - Minor tweaks to View Content
+        }
+
+        //Create a new Product record. Also returns the products data as JSON.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AjaxCreate(Product product)
+        {
+            db.Products.Add(product);
+            db.SaveChanges();
+            return Json(product);
+
+
+            //////////////////example
+            /*
+             * Create a Partial View (ProductCreate.cshtml)
+             * - Template: Create
+             * - Model: Product
+             * - Data Context classL ChessStoreEntities
+             * - Check "Create as Partial View"
+             */
+        }
+
+        //GET PartialView for a product edit form displayed with AJAX
+        [HttpGet]
+        public PartialViewResult ProductEdit(int id)
+        {
+            Product product = db.Products.Find(id);
+            return PartialView(product);
+
+            /*
+             * Create a Partial View (ProductEdit.cshtml) 
+             * - Template: edit
+             * - Model: Product
+             * - Date Context Class: ChessStorePlusEntities
+             * - Check the "Create as Partial View" checkbox
+             * - Minor tweaks to content
+             */
+        }
+
+        //Edits publisher record and returns publishers's data as JSON
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AjaxEdit(Product product)
+        {
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(product);
+        }
+
+        // POST: products/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "")] Product product,
+            HttpPostedFileBase productCover)
+        {
+            if (ModelState.IsValid)
+            {
+                #region File Upload
+
+                //Check to see if a new file has been uploaded. If not, the HiddenFor()
+                //in the view will maintain the original value
+                string file = "orangeChess-3.jpg";
+
+                //If a file has been uploaded
+                if (productCover != null)
+                {
+                    //Get the name
+                    file = productCover.FileName;
+
+                    //Capture the extension
+                    string ext = file.Substring(file.LastIndexOf('.'));
+
+                    //Create a "whitelist" of accepted exts
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+
+                    //Check that the uploaded file ext is in our list of acceptable extensions 
+                    //and that the file size is <= 4MB
+
+                    if (goodExts.Contains(ext.ToLower()) && productCover.ContentLength <= 4194304)
+                    {
+                        //Create a new file name (using a GUID)
+                        file = Guid.NewGuid() + ext;
+
+                        #region Resize Image
+
+                        string savePath = Server.MapPath("~/Content/imgstore/products/");
+
+                        Image convertedImage = Image.FromStream(productCover.InputStream);
+
+                        int maxImageSize = 500;
+
+                        int maxThumbSize = 100;
+
+                        ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+
+                        #endregion
+
+                        if (product.ProductImage != null && product.ProductImage != "NoImage.png")
+                        {
+                            string path = Server.MapPath("~/Content/imgstore/products/");
+                            ImageUtility.Delete(path, product.ProductImage);
+                        }
+
+                        //Update the property of the object
+                        product.ProductImage = file;
+                    }
+
+
+                }
+
+
+                #endregion
+
+
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            //ViewBag.productID = new SelectList(db.productRoyalties, "productID", "productID", product.productID);
+            //ViewBag.productStatusID = new SelectList(db.productStatuses, "productStatusID", "productStatusName", product.productStatusID);
+            //ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "GenreName", product.GenreID);
+            //ViewBag.PublisherID = new SelectList(db.Publishers, "PublisherID", "PublisherName", product.PublisherID);
+            return View(product);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -206,88 +368,9 @@ namespace _StoreFront.UI.MVC.Controllers
             base.Dispose(disposing);
         }
 
-
-
-        #region AJAX CRUD Functionality
-
-        ////Deletes the product record, returns only JSON data on id & confirmation
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //public JsonResult AjaxDelete(int id)
-        //{
-        //    Product product = db.Products.Find(id);
-        //    db.Products.Remove(product);
-        //    db.SaveChanges();
-
-        //    string confirmMessage = string.Format("Deleted Product '{0}' from the database.", product.ProductName);
-        //    return Json(new { id, message = confirmMessage });
-        //}
-
-        ////Gets the partial View for Details with AJAX
-        ////Generate this View like normal, but choose Details scaffolding for Product AND check Partial View checkbox
-        //[HttpGet]
-        //public PartialViewResult ProductDetails(int id)
-        //{
-        //    Product product = db.Products.Find(id);
-        //    return PartialView(product);
-
-
-        //    ///////////////////////////example
-        //    //Create Partial View (ProductDetails.cshtml)
-        //    // - Template: Details
-        //    // - Model Class: Product
-        //    // - Data Context Class: ChessStoreEntities
-        //    // - Check "Create as Partial View" checkbox
-        //    // - Minor tweaks to View Content
-        //}
-
-        ////Create a new Product record. Also returns the products data as JSON.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public JsonResult AjaxCreate(Product product)
-        //{
-        //    db.Products.Add(product);
-        //    db.SaveChanges();
-        //    return Json(product);
-
-
-        //    //////////////////example
-        //    /*
-        //     * Create a Partial View (ProductCreate.cshtml)
-        //     * - Template: Create
-        //     * - Model: Product
-        //     * - Data Context classL ChessStoreEntities
-        //     * - Check "Create as Partial View"
-        //     */
-        //}
-
-        ////GET PartialView for a product edit form displayed with AJAX
-        //[HttpGet]
-        //public PartialViewResult ProductEdit(int id)
-        //{
-        //    Product product = db.Products.Find(id);
-        //    return PartialView(product);
-
-        //    /*
-        //     * Create a Partial View (ProductEdit.cshtml) 
-        //     * - Template: edit
-        //     * - Model: Product
-        //     * - Date Context Class: ChessStorePlusEntities
-        //     * - Check the "Create as Partial View" checkbox
-        //     * - Minor tweaks to content
-        //     */
-        //}
-
-        ////Edits publisher record and returns publishers's data as JSON
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public JsonResult AjaxEdit(Product product)
-        //{
-        //    db.Entry(product).State = EntityState.Modified;
-        //    db.SaveChanges();
-        //    return Json(product);
-        //}
-
         #endregion
+
+
 
     }
 }

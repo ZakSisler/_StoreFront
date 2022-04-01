@@ -392,6 +392,7 @@
     <Content Include="fonts\_OG_Fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="configs\connections.config" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\_OG_Scripts\bootstrap.js" />
     <Content Include="Scripts\_OG_Scripts\bootstrap.min.js" />
     <Content Include="fonts\_OG_Fonts\fontawesome-webfont.eot" />
@@ -404,7 +405,7 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <None Include="Scripts\_OG_Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\_OG_Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\_OG_Scripts\jquery.validate-vsdoc.js" />

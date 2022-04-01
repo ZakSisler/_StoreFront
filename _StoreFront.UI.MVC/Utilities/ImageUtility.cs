@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;//added for CompositingQuality
 using System.IO;//added for FileInfo
 using System;
 
-namespace MVC3.UI.MVC.Utilities
+namespace _StoreFront.UI.MVC.Utilities
 {
     public class ImageUtility
     {
@@ -88,7 +88,7 @@ namespace MVC3.UI.MVC.Utilities
         public static void Delete(string path, string fileName)
         {
             //Skip this action if targeted file is the "default image".
-            if (fileName.ToLower() == "noimage.png")
+            if (fileName.ToLower() == "orangeChess-3.jpg")
             {
                 return;
             }
