@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "ERROR: Page Not Found";
+
+    string path = "";
+    if (HttpContext.Current.Request.QueryString["aspxerrorpath"] != null)
+    {
+        path = HttpContext.Current.Request.QueryString["aspxerrorpath"].ToUpper();
+    }
+    path += " cannot be found.";
+}
+
+<h2 class="text-warning">@ViewBag.Title</h2>
+<p class="alert alert-warning">
+    @path
+</p>
+

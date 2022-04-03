@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Exceptions\DBOfflineException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -373,6 +375,7 @@
     <Content Include="Content\img\chessTutoring.jpg" />
     <Content Include="Content\img\fancyChessSet.jpg" />
     <Content Include="Content\img\femaleChessLesson.jpg" />
+    <Content Include="Content\img\getShrekked.png" />
     <Content Include="Content\img\glassChessPieces.jpg" />
     <Content Include="Content\img\goldAndSilverSet.jpg" />
     <Content Include="Content\img\metalChessKnight.jpg" />
@@ -495,6 +498,11 @@
     <Content Include="Views\Products\ProductDetails.cshtml" />
     <Content Include="Views\Products\ProductEdit.cshtml" />
     <Content Include="Views\Products\ProductCreate.cshtml" />
+    <Content Include="Views\Errors\Throw404.cshtml" />
+    <Content Include="Views\Errors\Unresolved.cshtml" />
+    <Content Include="Views\Errors\DBTest.cshtml" />
+    <Content Include="Views\Errors\DBOffline.cshtml" />
+    <Content Include="Views\Errors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

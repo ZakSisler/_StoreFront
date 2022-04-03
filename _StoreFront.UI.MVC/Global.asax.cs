@@ -17,5 +17,16 @@ namespace _StoreFront.UI.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_Error()
+        {
+            //Send user to the default custom error page
+            Response.Redirect("~/CustomErrors/Unresolved");
+
+            //The above will only work if the MVC routing still works...
+
+            //SUPER SAFE EXAMPLE - Send the user to a basic HTML page with the path rather than the controller/ action
+            Response.Redirect("~/error.html");
+        }
     }
 }
