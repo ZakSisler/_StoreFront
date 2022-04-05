@@ -26,7 +26,7 @@ namespace _StoreFront.UI.MVC
             //The above will only work if the MVC routing still works...
 
             //SUPER SAFE EXAMPLE - Send the user to a basic HTML page with the path rather than the controller/ action
-            Response.Redirect("~/error.html");
+            Response.Redirect("~/Error.html");
         }
     }
 }
