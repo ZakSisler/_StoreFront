@@ -333,7 +333,7 @@ namespace _StoreFront.UI.MVC.Controllers
 
                         if (product.ProductImage != null && product.ProductImage != "NoImage.png")
                         {
-                            string path = Server.MapPath("~/Content/imgstore/products/");
+                            string path = Server.MapPath("~/Content/img/products/");
                             ImageUtility.Delete(path, product.ProductImage);
                         }
 
